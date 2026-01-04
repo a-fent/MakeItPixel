@@ -1,4 +1,7 @@
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center"><img height="64px" src="doc/logo.png"></p>
 
@@ -76,6 +79,21 @@ g++ src/* -Iinclude -lsfml-graphics -o makeitpixel
 ## Contributors
 This list is empty... for now ;)
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.pressure.to"><img src="https://avatars.githubusercontent.com/u/12329153?v=4?s=100" width="100px;" alt="Alex Fenton"/><br /><sub><b>Alex Fenton</b></sub></a><br /><a href="https://github.com/MiguelMJ/MakeItPixel/commits?author=a-fent" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 ***
 
 ## Usage
