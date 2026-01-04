@@ -2,6 +2,7 @@
 #define __MIPA_QUANTIZATION_HPP__
 
 #include <cmath>
+#include <map>
 
 #include <SFML/Graphics.hpp>
 
@@ -13,7 +14,7 @@ namespace mipa{
         sf::Vector2u imgSize = image.getSize();        
         for(uint y = 0; y < imgSize.y; y++){
             for(uint x = 0; x < imgSize.x; x++){
-                image.setPixel(x, y, quant(image.getPixel(x, y)));
+				image.setPixel({x, y}, quant(image.getPixel({x, y})));
             }
         }
     }
@@ -22,26 +23,26 @@ namespace mipa{
         sf::Vector2u imgSize = image.getSize();        
         for(uint y = 0; y < imgSize.y; y++){
             for(uint x = 0; x < imgSize.x; x++){
-                RGB oldColor = image.getPixel(x,y);
+				RGB oldColor = image.getPixel({x,y});
                 RGB newColor = quant(oldColor);
-                image.setPixel(x,y,newColor); 
+                image.setPixel({x,y},newColor); 
                 float err = rgbSquaredDistance(oldColor, newColor);
                 if (err > threshold * threshold){
                     float rErr = (float)oldColor.r - newColor.r;
                     float gErr = (float)oldColor.g - newColor.g;
                     float bErr = (float)oldColor.b - newColor.b;
-                    auto updatePixel = [&](uint xi, uint yi, float t){
-                        if(xi >= imgSize.x || yi >= imgSize.y) return; // unsigned so negative overflow
-                        RGB p = image.getPixel(xi, yi);
+                    auto updatePixel = [&](sf::Vector2u coords, float t){
+                        if(coords.x >= imgSize.x || coords.y >= imgSize.y) return; // unsigned so negative overflow
+                        RGB p = image.getPixel(coords);
                         p.r = std::max(0.f, std::min(255.f, (float)p.r + (rErr * t)));
                         p.g = std::max(0.f, std::min(255.f, (float)p.g + (gErr * t)));
                         p.b = std::max(0.f, std::min(255.f, (float)p.b + (bErr * t)));
-                        image.setPixel(xi, yi, p);
+                        image.setPixel(coords, p);
                     };
-                    updatePixel(x+1, y+1, 1.f/16);
-                    updatePixel(x-1, y+1, 3.f/16);
-                    updatePixel(x, y+1, 5.f/16);
-                    updatePixel(x+1, y, 7.f/16);
+                    updatePixel({x+1, y+1}, 1.f/16);
+                    updatePixel({x-1, y+1}, 3.f/16);
+                    updatePixel({x, y+1}, 5.f/16);
+                    updatePixel({x+1, y}, 7.f/16);
                 }
             }
         }
@@ -63,7 +64,7 @@ namespace mipa{
         sf::Vector2u imgSize = image.getSize();
         for(uint y = 0; y < imgSize.y; y++){
             for(uint x = 0; x < imgSize.x; x++){
-                RGB oldColor = image.getPixel(x,y);
+				RGB oldColor = image.getPixel({x,y});
                 double mij = m.get(y % m.getHeight(), x % m.getWidth()) / N - 0.5;
                 auto clamp = [](int x)->int{return std::min(255,std::max(0,x));};
                 RGB interColor;
@@ -75,9 +76,9 @@ namespace mipa{
                 RGB quantOldColor = quant(oldColor);
                 float err = rgbDistance(oldColor, newColor);
                 if(err > threshold * threshold){
-                    image.setPixel(x,y, newColor);
+					image.setPixel({x,y}, newColor);
                 }else{
-                    image.setPixel(x,y, quantOldColor);
+					image.setPixel({x,y}, quantOldColor);
                 }
 
             }

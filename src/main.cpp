@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cstdint>
 
 #include <SFML/Graphics.hpp>
 
@@ -99,7 +100,7 @@ sf::Image pixelize(const sf::Image& image, uint max_width, uint max_height, cons
     sf::Image newimg;
     float blockwidth = (float)origImgSize.x / width;
     float blockheight = (float)origImgSize.y / height;
-    newimg.create(width, height);
+    newimg.resize({width, height});
     for(uint j = 0; j <= height; j++){
         for(uint i = 0; i <= width; i++){
             std::vector<RGB> block;
@@ -109,11 +110,11 @@ sf::Image pixelize(const sf::Image& image, uint max_width, uint max_height, cons
                 for(uint bi = 0; bi < blockwidth; bi++){
                     uint x = i * blockwidth + bi;
                     if(x >= origImgSize.x) break;
-                    block.push_back(image.getPixel(x,y));
+                    block.push_back(image.getPixel({x,y}));
                 }
             }
             if(!block.empty()){
-                newimg.setPixel(i,j,selectorfun(block));
+				newimg.setPixel({i,j},selectorfun(block));
             }
         }
     }
@@ -123,12 +124,12 @@ sf::Image pixelize(const sf::Image& image, uint max_width, uint max_height, cons
 void normalize(sf::Image& image){
     log(INFO, "Normalizing...", "");
     sf::Vector2u imgSize = image.getSize();
-    sf::Uint8 minR = 0xff, maxR = 0;
-    sf::Uint8 minG = 0xff, maxG = 0;
-    sf::Uint8 minB = 0xff, maxB = 0;
+    std::uint8_t minR = 0xff, maxR = 0;
+    std::uint8_t minG = 0xff, maxG = 0;
+    std::uint8_t minB = 0xff, maxB = 0;
     for(int r = 0; r < imgSize.y; r++){
         for(int c = 0; c < imgSize.x; c++){
-            sf::Color pixel_color = image.getPixel(c, r);
+			sf::Color pixel_color = image.getPixel({c, r});
             minR = std::min(minR, pixel_color.r);
             minG = std::min(minG, pixel_color.g);
             minB = std::min(minB, pixel_color.b);
@@ -142,21 +143,21 @@ void normalize(sf::Image& image){
     int db = maxB - minB;
     for(int r = 0; r < imgSize.y; r++){
         for(int c = 0; c < imgSize.x; c++){
-            sf::Color pixel_color = image.getPixel(c, r);
+			sf::Color pixel_color = image.getPixel({c, r});
             pixel_color.r = 255 * ((float)pixel_color.r - minR)/dr;
             pixel_color.g = 255 * ((float)pixel_color.g - minG)/dg;
             pixel_color.b = 255 * ((float)pixel_color.b - minB)/db;
-            image.setPixel(c, r, pixel_color);
+            image.setPixel({c, r}, pixel_color);
         }
     }
 }
 
 void palette_to_file(const Palette& palette, const std::string& path, int rows=1){
     sf::Image image;
-    image.create(50*palette.size()/rows, 150*rows);
+    image.resize({50*palette.size()/rows, 150*rows});
     for(int r = 0; r < image.getSize().y; r++){
         for(int c = 0; c < image.getSize().x; c++){
-            image.setPixel(c,r,palette[(r/150)*(palette.size()/rows)+c/50]);
+			image.setPixel({c,r},palette[(r/150)*(palette.size()/rows)+c/50]);
         }
     }
     image.saveToFile(path);
