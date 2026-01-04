@@ -1,13 +1,12 @@
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center"><img height="64px" src="doc/logo.png"></p>
 
 <h3 align="center">Make images look like pixel art</h3>
 
-<p align="center"><img src="https://img.shields.io/badge/C++-11-00599C?style=flat-square&logo=c%2B%2B"> <img src="https://img.shields.io/badge/SFML-v2.5.1-8CC445?logo=SFML&style=flat-square"> <img src="https://img.shields.io/badge/version-v0.1-informational?style=flat-square"/> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational?style=flat-square"/></a><a href="https://github.com/MiguelMJ/MakeItPixel/wiki"><img src="https://img.shields.io/badge/code-documented-success?style=flat-square"></a></p>
+
+<p align="center"><img src="https://img.shields.io/badge/C++-11-00599C?style=flat-square&logo=c%2B%2B"> <img src="https://img.shields.io/badge/SFML-v3.0.x-8CC445?logo=SFML&style=flat-square"> <img src="https://img.shields.io/badge/version-v0.2-informational?style=flat-square"/> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational?style=flat-square"/></a><a href="https://github.com/MiguelMJ/MakeItPixel/wiki"><img src="https://img.shields.io/badge/code-documented-success?style=flat-square"></a>
+</p>
 
 ## Preview
 
@@ -60,7 +59,7 @@ Example results:
 
 ## Dependencies
 
-- [SFML v2.5.1](https://www.sfml-dev.org/index.php) ([release](https://github.com/SFML/SFML/releases/tag/2.5.1))
+- [SFML v3.0.x](https://www.sfml-dev.org/index.php) ([release](https://github.com/SFML/SFML/releases))
 
 ## Build
 
@@ -77,7 +76,6 @@ g++ src/* -Iinclude -lsfml-graphics -o makeitpixel
 - And of course, :star:  **star this repository** and give it some visibility [![(stargazers)](https://img.shields.io/github/stars/MiguelMJ/MakeItPixel?style=social)](https://github.com/MiguelMJ/Candle/stargazers).
 
 ## Contributors
-This list is empty... for now ;)
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
