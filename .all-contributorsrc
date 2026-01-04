@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "a-fent",
+      "name": "Alex Fenton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12329153?v=4",
+      "profile": "http://www.pressure.to",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "MakeItPixel",
+  "projectOwner": "MiguelMJ"
+}
